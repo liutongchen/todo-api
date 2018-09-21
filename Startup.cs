@@ -45,6 +45,8 @@ namespace TodoApi
             }
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseDefaultFiles();
             app.UseMvc();
         }
     }

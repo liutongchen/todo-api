@@ -37,5 +37,43 @@ namespace TodoApi.Controllers
             }
             return item;
         }
+
+        [HttpPost]
+        public ActionResult<TodoItem> Create(TodoItem item) 
+        {
+            //TODO: WHERE IS THE DEFAULT VALUE OF ITEM'S FIELD DEFINED?
+            _context.TodoItems.Add(item);
+            _context.SaveChanges();
+            return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult<TodoItem> Update(long id, TodoItem item) // TODO: WHY ARE ALL METHODS INITIALLY-CAPITALIZED
+        {
+            var todo = _context.TodoItems.Find(id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            todo.IsComplete = item.IsComplete;
+            todo.Name = item.Name;
+            _context.TodoItems.Update(todo);
+            _context.SaveChanges();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(long id)
+        {
+            var todo = _context.TodoItems.Find(id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+            _context.TodoItems.Remove(todo);
+            _context.SaveChanges();
+            return NoContent();
+        }
     }
 }
