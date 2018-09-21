@@ -6,7 +6,7 @@ using TodoApi.Models;
 
 namespace TodoApi.Controllers 
 {
-    [Route("api/[controller]")] //TODO: WHAT DOES "[controller]" DO HERE?
+    [Route("api/[controller]")]
     [ApiController]
     public class TodoController : ControllerBase 
     {
@@ -30,7 +30,7 @@ namespace TodoApi.Controllers
         [HttpGet("{id}", Name = "GetTodo")]
         public ActionResult<TodoItem> GetById(long id)
         {
-            var item = _context.TodoItems.Find(id); //TODO: WHY USE VAR INSTEAD OF RETURN TYPE?
+            var item = _context.TodoItems.Find(id); 
             if (item == null)
             {
                 return NotFound();
@@ -48,7 +48,7 @@ namespace TodoApi.Controllers
         }
 
         [HttpPut("{id}")]
-        public ActionResult<TodoItem> Update(long id, TodoItem item) // TODO: WHY ARE ALL METHODS INITIALLY-CAPITALIZED
+        public ActionResult<TodoItem> Update(long id, TodoItem item) 
         {
             var todo = _context.TodoItems.Find(id);
             if (todo == null)
